@@ -1,0 +1,27 @@
+{
+    "include": ["src", "src/lib"],
+    "exclude": ["**/*.test.ts", "src/lib"],
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "esnext",
+        "lib": ["esnext"],
+        "declaration": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "outDir": "dist",
+        // "noUnusedLocals": true,
+        "noImplicitAny": true,
+        "allowJs": true,
+        "noEmit": true,
+        "resolveJsonModule": true,
+        "stripInternal": true,
+
+        "types": ["vitest/globals", "node"],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["/src/*"]
+        }
+    }
+}

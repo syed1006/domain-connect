@@ -1,0 +1,5 @@
+# Ignore all 
+/.github
+/dist
+/package-lock.json
+/pnpm-lock.yaml

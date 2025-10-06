@@ -3,3 +3,4 @@
 
 .npmrc
 private_key.pem
+domain-connect-**.tgz

@@ -10,6 +10,13 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "@types/node": "^24.3.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "dns": "^0.2.2",
+    "psl": "^1.15.0"
   }
 }

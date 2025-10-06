@@ -2,3 +2,4 @@
 /dist
 
 .npmrc
+private_key.pem

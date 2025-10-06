@@ -20,7 +20,7 @@ export class PublicSuffixList {
 }
 
 function isParsedDomain(
-    result: psl.ParsedDomain | psl.ErrorResult<keyof psl.errorCodes>
+    result: psl.ParsedDomain | psl.ErrorResult<keyof psl.errorCodes>,
 ): result is psl.ParsedDomain {
     return !("error" in result);
 }

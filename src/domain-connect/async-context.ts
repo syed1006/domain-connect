@@ -19,7 +19,7 @@ export class DomainConnectAsyncContext {
         providerId: string,
         serviceId: string | string[],
         returnUrl: string,
-        params: Record<string, any>
+        params: Record<string, any>,
     ) {
         this.config = config;
         this.providerId = providerId;

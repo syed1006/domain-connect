@@ -64,7 +64,7 @@ export class DomainConnect {
 
     private async getDomainConfigForRoot(
         domainRoot: string,
-        domainConnectApi: string
+        domainConnectApi: string,
     ): Promise<DomainConnectConfigData> {
         const url = `https://${domainConnectApi}/v2/${domainRoot}/settings`;
 
@@ -72,14 +72,14 @@ export class DomainConnect {
             const response = await getJson(this.networkContext, url);
             console.log(
                 `Domain Connect config for ${domainRoot} over ${domainConnectApi}: ${JSON.stringify(
-                    response
-                )}`
+                    response,
+                )}`,
             );
             return response;
         } catch (error) {
             console.log(`Exception when getting config: ${error}`);
             throw new NoDomainConnectSettingsException(
-                `No Domain Connect config found for ${domainRoot}.`
+                `No Domain Connect config found for ${domainRoot}.`,
             );
         }
     }
@@ -94,11 +94,11 @@ export class DomainConnect {
     private static generateSigParams(
         queryParams: string,
         privateKey?: string,
-        keyId?: string
+        keyId?: string,
     ): string {
         if (!privateKey || !keyId) {
             throw new InvalidDomainConnectSettingsException(
-                "Private key and/or key ID not provided for signing"
+                "Private key and/or key ID not provided for signing",
             );
         }
 
@@ -110,7 +110,7 @@ export class DomainConnect {
     async checkTemplateSupported(
         config: DomainConnectConfig,
         providerId: string,
-        serviceIds: string | string[]
+        serviceIds: string | string[],
     ): Promise<void> {
         const serviceIdArray = Array.isArray(serviceIds) ? serviceIds : [serviceIds];
 
@@ -123,7 +123,7 @@ export class DomainConnect {
             } catch (error) {
                 console.log(`Exception when getting config: ${error}`);
                 throw new TemplateNotSupportedException(
-                    `No template for serviceId: ${serviceId} from ${providerId}`
+                    `No template for serviceId: ${serviceId} from ${providerId}`,
                 );
             }
         }
@@ -139,7 +139,7 @@ export class DomainConnect {
         groupIds?: string[],
         sign = false,
         privateKey?: string,
-        keyId?: string
+        keyId?: string,
     ): Promise<string> {
         const config = await this.getDomainConfig(domain);
 
@@ -182,7 +182,7 @@ export class DomainConnect {
         redirectUri: string,
         params: Record<string, any> = {},
         state?: string,
-        serviceIdInPath = false
+        serviceIdInPath = false,
     ): Promise<DomainConnectAsyncContext> {
         const config = await this.getDomainConfig(domain);
 
@@ -194,7 +194,7 @@ export class DomainConnect {
 
         if (serviceIdInPath && Array.isArray(serviceId)) {
             throw new DomainConnectException(
-                "Multiple services are only supported with serviceIdInPath=false"
+                "Multiple services are only supported with serviceIdInPath=false",
             );
         }
 
@@ -210,7 +210,7 @@ export class DomainConnect {
             providerId,
             serviceId,
             redirectUri,
-            params
+            params,
         );
 
         const serviceIdParam = Array.isArray(serviceId) ? serviceId.join("+") : serviceId;
@@ -230,7 +230,7 @@ export class DomainConnect {
 
     async getAsyncToken(
         context: DomainConnectAsyncContext,
-        credentials: DomainConnectAsyncCredentials
+        credentials: DomainConnectAsyncCredentials,
     ): Promise<DomainConnectAsyncContext> {
         if (!context.code) {
             throw new AsyncTokenException("No authorization code provided");
@@ -263,13 +263,13 @@ export class DomainConnect {
             .sort()
             .map((key) => [key, params[key]]);
         const url = `${context.config.urlAPI}/v2/oauth/access_token?${new URLSearchParams(
-            queryString
+            queryString,
         ).toString()}`;
 
         try {
             if (credentials.apiUrl !== context.config.urlAPI) {
                 throw new AsyncTokenException(
-                    "URL API for provider does not match registered one with credentials"
+                    "URL API for provider does not match registered one with credentials",
                 );
             }
 
@@ -287,7 +287,7 @@ export class DomainConnect {
             if (status === HttpStatus.BAD_REQUEST) {
                 const errorDesc = data.error_description || "";
                 throw new AsyncTokenException(
-                    `Failed to get async token: ${status} ${data.error} ${errorDesc}`
+                    `Failed to get async token: ${status} ${data.error} ${errorDesc}`,
                 );
             }
 
@@ -324,7 +324,7 @@ export class DomainConnect {
         serviceId?: string | string[],
         params: Record<string, any> = {},
         force = false,
-        groupIds?: string[]
+        groupIds?: string[],
     ): Promise<void> {
         const actualHost = host || context.config.host;
         const actualServiceId = serviceId || context.serviceId;

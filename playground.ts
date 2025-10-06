@@ -16,7 +16,7 @@ async function main() {
         [],
         true,
         private_key_content.toString(),
-        "_dck1"
+        "_dck1",
     );
     console.log(res);
     console.log(await dc.getDomainConfig("syedcodes.lol"));

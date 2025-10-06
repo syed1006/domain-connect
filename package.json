@@ -1,22 +1,51 @@
 {
-  "name": "domain-connect",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/node": "^24.3.1",
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
-  },
-  "dependencies": {
-    "dns": "^0.2.2",
-    "psl": "^1.15.0"
-  }
+    "name": "domain-connect",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "format": "prettier --write",
+        "lint": "eslint src",
+        "prepare": "husky"
+    },
+    "keywords": [
+        "typescript",
+        "library",
+        "domain",
+        "connect",
+        "connect"
+    ],
+    "author": {
+        "name": "Syed Salman",
+        "email": "syedsalman1006@gmail.com"
+    },
+    "license": "MIT",
+    "description": "Typescript implementation of domain connect protocol.",
+    "devDependencies": {
+        "@eslint/js": "^9.37.0",
+        "@types/node": "^24.3.1",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^9.37.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.2.3",
+        "prettier": "^3.6.2",
+        "tsup": "^8.5.0",
+        "typescript": "^5.9.2",
+        "typescript-eslint": "^8.45.0",
+        "vitest": "^3.2.4"
+    },
+    "dependencies": {
+        "dns": "^0.2.2",
+        "psl": "^1.15.0"
+    }
 }

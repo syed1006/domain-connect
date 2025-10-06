@@ -7,7 +7,7 @@ export async function postJson(
     url: string,
     content: any,
     basicAuth?: [string, string],
-    bearer?: string
+    bearer?: string,
 ): Promise<string> {
     const [response, status] = await httpRequest(context, {
         method: HttpMethod.POST,

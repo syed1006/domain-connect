@@ -4,7 +4,7 @@ import { httpRequest } from "./http-request";
 
 export async function httpRequestJson(
     context: NetworkContext,
-    options: HttpRequestOptions
+    options: HttpRequestOptions,
 ): Promise<[any, number]> {
     const [response, status] = await httpRequest(context, options);
     try {

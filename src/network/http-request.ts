@@ -55,7 +55,7 @@ function buildRequestOptions(
     headers: Record<string, string>,
     context: NetworkContext,
     parsedUrl: URL,
-    isHttps: boolean
+    isHttps: boolean,
 ): http.RequestOptions {
     const { method } = options;
     const requestOptions: http.RequestOptions = {
@@ -91,14 +91,14 @@ function buildRequestOptions(
 
 function createResponseHandler(
     requestUrl: string,
-    acceptedStatuses: number[]
+    acceptedStatuses: number[],
 ): (res: http.IncomingMessage) => Promise<[string, number]> {
     return (res: http.IncomingMessage): Promise<[string, number]> => {
         return new Promise((resolve, reject) => {
             if (!acceptedStatuses.includes(res.statusCode || 0)) {
                 console.debug(`Failed to query ${requestUrl}: ${res.statusCode}`);
                 reject(
-                    new Error(`Failed to read from ${requestUrl}. HTTP code: ${res.statusCode}`)
+                    new Error(`Failed to read from ${requestUrl}. HTTP code: ${res.statusCode}`),
                 );
                 return;
             }
@@ -125,7 +125,7 @@ function handleHttpsProxy(
     context: NetworkContext,
     parsedUrl: URL,
     options: HttpRequestOptions,
-    headers: Record<string, string>
+    headers: Record<string, string>,
 ): Promise<[string, number]> {
     return new Promise((resolve, reject) => {
         const { method, body } = options;
@@ -197,7 +197,7 @@ function executeRequest(
     requestOptions: http.RequestOptions,
     isHttps: boolean,
     options: HttpRequestOptions,
-    handleResponse: (res: http.IncomingMessage) => Promise<[string, number]>
+    handleResponse: (res: http.IncomingMessage) => Promise<[string, number]>,
 ): Promise<[string, number]> {
     return new Promise((resolve, reject) => {
         const { body } = options;
@@ -231,7 +231,7 @@ function executeRequest(
 
 export async function httpRequest(
     context: NetworkContext,
-    options: HttpRequestOptions
+    options: HttpRequestOptions,
 ): Promise<[string, number]> {
     const { method, url: requestUrl } = options;
     const acceptedStatuses = options.acceptedStatuses || [HttpStatus.OK];
